@@ -46,3 +46,9 @@ pd_particle_mass = <double>: mass of particle
 
 Other sph_ parameters are used for sph simulation.
 ```
+
+# Data Visualization
+
+The visualization software is written in Qt 5.6.
+
+After having simulation data, select data path(or press B) and browse to folder <SAVED_DATA_FOLDER>/DATA.
