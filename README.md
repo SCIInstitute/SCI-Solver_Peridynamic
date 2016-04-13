@@ -51,4 +51,4 @@ Other sph_ parameters are used for sph simulation.
 
 The visualization software is written in Qt 5.6.
 
-After having simulation data, select data path(or press B) and browse to folder <SAVED_DATA_FOLDER>/DATA.
+After having simulation data, select data path(or press B) and browse to folder SAVED_DATA_FOLDER/DATA.
