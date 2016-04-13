@@ -9,7 +9,7 @@ arising from the use of this software.
 
 The project has been deprecated. There are still many bugs and performance issues.
 
-SPH simulation has been implemented but it is not finshed and may not work.
+SPH simulation has been implemented but it is not completed. It may work, but incorrectly.
 
 
 # Build
