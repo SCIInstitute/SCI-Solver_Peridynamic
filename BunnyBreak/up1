@@ -1,0 +1,2 @@
+#//make &
+rsync -v --update  * nghiatr@beast.sci.utah.edu:/scratch/nghia/SPHP.Bunny1/.

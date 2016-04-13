@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/">
+        <file>textures/stone1.jpg</file>
+        <file>textures/stone2.jpg</file>
+        <file>textures/wood1.jpg</file>
+        <file>textures/wood2.jpg</file>
+        <file>textures/checkerboard1.jpg</file>
+        <file>textures/checkerboard2.jpg</file>
+        <file>textures/sky1/negx.jpg</file>
+        <file>textures/sky1/negy.jpg</file>
+        <file>textures/sky1/negz.jpg</file>
+        <file>textures/sky1/posx.jpg</file>
+        <file>textures/sky1/posy.jpg</file>
+        <file>textures/sky1/posz.jpg</file>
+        <file>textures/sky2/negx.jpg</file>
+        <file>textures/sky2/negy.jpg</file>
+        <file>textures/sky2/negz.jpg</file>
+        <file>textures/sky2/posx.jpg</file>
+        <file>textures/sky2/posy.jpg</file>
+        <file>textures/sky2/posz.jpg</file>
+        <file>textures/sky3/negx.jpg</file>
+        <file>textures/sky3/negy.jpg</file>
+        <file>textures/sky3/negz.jpg</file>
+        <file>textures/sky3/posx.jpg</file>
+        <file>textures/sky3/posy.jpg</file>
+        <file>textures/sky3/posz.jpg</file>
+    </qresource>
+</RCC>

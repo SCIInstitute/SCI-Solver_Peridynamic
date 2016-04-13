@@ -1,0 +1,5 @@
+data_path="/scratch/SPHP.Bunny"
+mv $data_path/DATA $data_path/DATAx
+rm -rf $data_path/DATAx &
+
+#./build/SPHP params.txt

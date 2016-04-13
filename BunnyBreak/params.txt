@@ -1,0 +1,50 @@
+gpu_device 0
+adaptive_integration 0 
+
+num_sph_particle 0
+num_pd_particle 10000
+
+pd_stretch_limit_s0 1e-3
+
+wall_thickness 16
+tube_radius 5
+
+mesh_translation_z 1.5
+mesh_translation_x 0.5
+mesh_translation_y 0.5
+
+sph_initial_velocity 0.30
+
+steps_per_frame 10
+steps_per_state 500000
+
+start_step 0
+final_step 10000
+
+obj_file /scratch/nghia/PeriCUDA/BunnyBreak/bunny.obj
+saving_path /scratch/nghia/SimData/BunnyBreak
+
+dump_activity 0
+dump_density 0
+dump_velocity 0
+dump_stiffness 0
+dump_pd_bond_count 0
+
+
+radius_pd_over_sph 1
+boundary_min_x 0
+boundary_min_y 0
+boundary_min_z 0
+boundary_max_x 2
+boundary_max_y 2
+boundary_max_z 4
+
+sph_kernel_coeff 4.001
+pd_kernel_coeff 5.001
+sph_particle_mass 1000
+pd_particle_mass 1000
+
+sph_sph_viscosity 1e-5
+sph_pd_viscosity 1e-5
+sph_boundary_viscosity 1e-5
+sph_boundary_slip 1.0

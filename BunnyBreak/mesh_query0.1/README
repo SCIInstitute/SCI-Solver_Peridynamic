@@ -1,0 +1,13 @@
+mesh_query 0.1
+Released into the public domain by Robert Bridson (rbridson@cs.ubc.ca)
+
+(except for file predicates.cpp, which was released into the public domain by
+Jonathan Shewchuk)
+
+To build libmesh_query.a, simply type make.
+
+The header file mesh_query.h provides a bare bones plain C API to check if
+points lie inside or outside a watertight mesh or if a segment intersects an
+arbitrary mesh (returning barycentric coordinates if so), using a simple
+AABB tree for acceleration.
+

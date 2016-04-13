@@ -1,0 +1,5 @@
+#data_path="/Users/nghia/scratch/SPHP"
+#mv $data_path/DATA $data_path/DATAx
+#rm -rf $data_path/DATAx &
+
+./SPHP.Bunny params_pd.txt
