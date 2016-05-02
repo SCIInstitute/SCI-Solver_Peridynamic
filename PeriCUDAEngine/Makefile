@@ -165,10 +165,10 @@ endif
 ifneq ($(OS_ARCH),armv7l)
 #GENCODE_SM13    := -gencode arch=compute_13,code=sm_13
 endif
-#GENCODE_SM20    := -gencode arch=compute_20,code=sm_20
-GENCODE_SM30    := -gencode arch=compute_30,code=sm_30
+GENCODE_SM20    := -gencode arch=compute_20,code=sm_20
+#GENCODE_SM30    := -gencode arch=compute_30,code=sm_30
 #GENCODE_SM32    := -gencode arch=compute_32,code=sm_32
-GENCODE_SM35    := -gencode arch=compute_35,code=sm_35
+#GENCODE_SM35    := -gencode arch=compute_35,code=sm_35
 #GENCODE_SM50    := -gencode arch=compute_50,code=sm_50
 #GENCODE_SMXX    := -gencode arch=compute_50,code=compute_50
 GENCODE_FLAGS   ?= $(GENCODE_SM10) $(GENCODE_SM13) $(GENCODE_SM20) $(GENCODE_SM30) $(GENCODE_SM32) $(GENCODE_SM35) $(GENCODE_SM50) $(GENCODE_SMXX)
