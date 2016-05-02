@@ -1,3 +1,8 @@
 log
 **/*.o
 *.swp
+*.a
+BunnyBreak/BunnyBreak
+BunnyBreak/SimData/*
+PeriCUDAViz/PeriCUDAViz.pro.user*
+build-PeriCUDAViz-Desktop-Debug
