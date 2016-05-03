@@ -27,8 +27,7 @@ R. Geist(*1*) <br/>
 (*1*)Clemson University, USA  (*2*)University of Utah, USA
 
 The  application  of  spring-mass  systems  to  the  animation  of  brittle  fracture  is  revisited.  The  motivation  arisesfrom the recent popularity ofperidynamicsin the computational physics community. Peridynamic systems can beregarded as spring-mass systems with two specific properties. First, spring forces are based on a simple strainmetric, thereby decoupling spring stiffness from spring length. Second, masses are connected using a distance-based criterion. The relatively large radius of influence typically leads to a few hundred springs for every masspoint. Spring-mass systems with these properties are shown to be simple to implement, trivially parallelized, andwell-suited to animating brittle fracture.
-
-<br/><br/><br/><br/>
+<br/><br/>
 Requirements
 ==============
 
@@ -52,9 +51,7 @@ The CUDA Compute capability is specified in all Makefiles using the compiler fla
 ```c++
 arch=compute_20,code=sm_20
 ```
-where 20 represents the major (2) and minor (.0) numbers to specify a compute capability of 2.0.
-
-Terminal commands for building the three libraries:
+where 20 represents the major (2) and minor (.0) numbers to specify a compute capability of 2.0. Terminal commands for building the three libraries:
 ```c++
 cd <PATH>/PeriCUDAEngine
 make -j
@@ -108,5 +105,5 @@ Using the Library
 ==============
 
 The BunnyBreak project provides a basic usage example. The project is built by including the static library SPHPEngine.a, and the main.cpp and scene.cpp files. In main.cpp, instances of the Scene and Simulator objects are instantiated, the parameters are set according to the information specified in params.txt, and the simulator is run.
-
-Original Author's Note: This project has been deprecated in favor of CPU simulations that handle much larger models. SPH simulation has been implemented but not completed, so it may work incorrectly.
+<br/><br/>
+*Original Author's Note:* This project has been discontinued in favor of CPU simulations that handle much larger models. SPH simulation has been implemented but not completed, so it may work incorrectly.
