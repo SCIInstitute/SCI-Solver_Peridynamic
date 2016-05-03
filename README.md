@@ -7,7 +7,7 @@ The code was written by Nghia Truong at the Scientific Computing and Imaging Ins
 University of Utah, Salt Lake City, USA.
 Table of Contents
 ========
-- [Aknowledgements](#aknowledgements)
+- [Acknowledgements](#acknowledgements)
 - [Requirements](#requirements)
 - [Building](#building)<br/>
 		- [Linux / OSX](#linux-and-osx)<br/>
@@ -15,7 +15,8 @@ Table of Contents
 - [Running Examples](#running-examples)
 - [Using the Library](#using-the-library)
 
-<h4>Aknowledgements</h4>
+Acknowledgements
+=========
 **<a href ="http://sealab.cs.utah.edu/Papers/Levine-2014-APP/">A Peridynamic Perspective on Spring-Mass Fracture</a>**<br/>
 
 **AUTHORS:**
