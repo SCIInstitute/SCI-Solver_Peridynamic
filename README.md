@@ -5,6 +5,8 @@ SCI-Solver_Peridynamic is a C++/CUDA library written to simulate a fracture beha
 
 The code was written by Nghia Truong at the Scientific Computing and Imaging Institute, 
 University of Utah, Salt Lake City, USA.
+<br/>
+![alt tag](https://raw.githubusercontent.com/SCIInstitute/SCI-Solver_Peridynamic/master/figure6-1.png)
 Table of Contents
 ========
 - [Acknowledgements](#acknowledgements)
