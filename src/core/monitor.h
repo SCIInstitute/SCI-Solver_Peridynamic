@@ -10,6 +10,7 @@
 #define MONITOR_H
 
 #include <vector_types.h>
+#include <cuda.h>
 #include <helper_cuda.h>
 #include <map>
 #include <string>

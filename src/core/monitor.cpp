@@ -7,6 +7,7 @@
 //------------------------------------------------------------------------------------------
 #include "utilities.h"
 #include "monitor.h"
+#include <ctime>
 
 //------------------------------------------------------------------------------------------
 Monitor::Monitor()
@@ -96,9 +97,9 @@ void Monitor::printSimulationTime()
 //------------------------------------------------------------------------------------------
 void Monitor::recordEvent(const char* _event)
 {
-    time_t currentTime = time(NULL);
+    time_t currentTime = std::time(NULL);
     struct tm* localTime;
-    localTime = localtime(&currentTime);  // Convert the current time to the local time
+    localTime = std::localtime(&currentTime);  // Convert the current time to the local time
 
     cout << "[" << localTime->tm_hour << ":" << localTime->tm_min << ":" << localTime->tm_sec
          << "] " << _event << endl;

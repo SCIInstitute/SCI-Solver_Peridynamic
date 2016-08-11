@@ -25,10 +25,13 @@
 #include "cg_solver.cuh"
 #include "implicit_euler.cuh"
 #include "newmark_beta.cuh"
-
+#include <cuda.h>
+#include <cuda_runtime.h>
 
 typedef typename cusp::array1d_view< thrust::device_ptr<int>   > DeviceIndexArrayView;
 typedef typename cusp::array1d_view< thrust::device_ptr<real_t> > DeviceValueArrayView;
+typedef typename int ValueType;
+typedef typename double IndexType;
 //------------------------------------------------------------------------------------------
 Simulator::Simulator(int deviceID,
                      SimulationParameters& simParams,

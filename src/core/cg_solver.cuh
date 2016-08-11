@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <cuda.h>
+#include <cuda_runtime.h>
 #include <helper_math.h>
 #include <math_constants.h>
 #include <thrust/functional.h>

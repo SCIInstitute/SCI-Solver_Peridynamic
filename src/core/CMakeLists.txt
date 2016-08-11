@@ -1,0 +1,6 @@
+include_directories(${CMAKE_CURRENT_DIRECTORY})
+FILE(GLOB SRC *.cu *.c *.cpp *.cc)
+FILE(GLOB HDR *.cuh *.h *.hpp *.hh)
+
+CUDA_ADD_LIBRARY(PERIDYNAMIC_CORE ${SRC} ${HDR})
+ADD_DEPENDENCIES(PERIDYNAMIC_CORE cusp)

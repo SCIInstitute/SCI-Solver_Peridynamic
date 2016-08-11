@@ -9,6 +9,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 #include <stdint.h>
+#include <vector_types.h>
 
 #define PRINT_DEBUG 0
 
