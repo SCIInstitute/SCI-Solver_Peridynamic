@@ -126,7 +126,7 @@ void MainWindow::setupGUI()
     txtDataPath[0]->setEnabled(false);
 
     QToolButton* btnBrowseVP0 = new QToolButton;
-    btnBrowseVP0->setIcon(QIcon(":/icons/open.png"));
+    btnBrowseVP0->setIcon(QIcon("icons/open.png"));
     connect(btnBrowseVP0, &QToolButton::clicked, this, &MainWindow::browseDataPathVP0);
 
     txtDataPath[1] = new QLineEdit;
@@ -134,7 +134,7 @@ void MainWindow::setupGUI()
     txtDataPath[1]->setVisible(false);
 
     btnBrowseVP1 = new QToolButton;
-    btnBrowseVP1->setIcon(QIcon(":/icons/open.png"));
+    btnBrowseVP1->setIcon(QIcon("icons/open.png"));
     connect(btnBrowseVP1, &QToolButton::clicked, this, &MainWindow::browseDataPathVP1);
     btnBrowseVP1->setVisible(false);
 
@@ -164,7 +164,7 @@ void MainWindow::setupGUI()
     txtOutputPath->setEnabled(false);
 
     QToolButton* btnBrowseOutput = new QToolButton;
-    btnBrowseOutput->setIcon(QIcon(":/icons/save.png"));
+    btnBrowseOutput->setIcon(QIcon("icons/save.png"));
     connect(btnBrowseOutput, &QToolButton::clicked, this, &MainWindow::browseOutputPath);
     connect(this, &MainWindow::outputPathChanged, renderer,
             & DualViewportRenderer::setImageOutputPath);
