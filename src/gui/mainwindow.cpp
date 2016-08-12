@@ -47,19 +47,29 @@ MainWindow::MainWindow(QWidget* parent): QMainWindow(parent),
     connect(controller->wgPDParticleColor, &ColorSelector::colorChanged, renderer,
             & DualViewportRenderer::setPDParticleColor);
 
-    connect(dataReader, &DataReader::currentFrameChanged, sldProgress, &QSlider::setValue);
-    connect(dataReader, &DataReader::currentFrameChanged, this,
-            &MainWindow::updateStatusCurrentFrame);
+    connect(dataReader, SIGNAL(&DataReader::currentFrameChanged(int)),
+      sldProgress, SLOT(&QSlider::setValue(int)));
+    connect(dataReader, SIGNAL(&DataReader::currentFrameChanged(int)), this,
+           SLOT( &MainWindow::updateStatusCurrentFrame(int)));
 
-    connect(dataReader, &DataReader::particlePositonsChanged, renderer,
-            & DualViewportRenderer::setParticlePositions);
-    connect(dataReader, &DataReader::particleDensitiesPositonsChanged, renderer,
-            & DualViewportRenderer::setParticleDensitiesPositions);
-    connect(dataReader, &DataReader::particleStiffnesPositonsChanged, renderer,
-            & DualViewportRenderer::setParticleStiffnesPositions);
-    connect(dataReader, &DataReader::particleActivitiesPositonsChanged, renderer,
-            & DualViewportRenderer::setParticleActivitiesPositions);
-    connect(sldProgress, &QSlider::sliderMoved, dataReader, &DataReader::setCurrentFrame);
+    connect(dataReader, SIGNAL(&DataReader::particlePositonsChanged(
+      real_t*,real_t*,int*,int*,int,int)), renderer,
+      SLOT(&DualViewportRenderer::setParticlePositions(
+      real_t*, real_t*, int*, int*, int, int)));
+    connect(dataReader, SIGNAL(&DataReader::particleDensitiesPositonsChanged(
+      *, real_t*, int*, int*, real_t*, int, int)), renderer,
+      SLOT(&DualViewportRenderer::setParticleDensitiesPositions(
+      real_t*, real_t*, int*, int*, real_t*, int, int)));
+    connect(dataReader, SIGNAL(&DataReader::particleStiffnesPositonsChanged(
+      real_t*, real_t*, int*, int*, real_t*, int, int)), renderer,
+      SLOT(&DualViewportRenderer::setParticleStiffnesPositions(
+      real_t*, real_t*, int*, int*, real_t*, int, int)));
+    connect(dataReader, SIGNAL(&DataReader::particleActivitiesPositonsChanged(
+      real_t*, real_t*, int*, int*, int, int)), renderer,
+      SLOT(&DualViewportRenderer::setParticleActivitiesPositions(
+      real_t*, real_t*, int*, int*, int, int)));
+    connect(sldProgress, SIGNAL(&QSlider::sliderMoved(int)), 
+      dataReader, SLOT(&DataReader::setCurrentFrame(int)));
 
 
     /////////////////////////////////////////////////////////////////
