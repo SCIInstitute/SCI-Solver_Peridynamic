@@ -6,7 +6,7 @@
 //
 //------------------------------------------------------------------------------------------
 #include <iostream>
-#include <math.h>
+#include <cmath>
 #include <core/helper_math.h>
 #include "scene.h"
 

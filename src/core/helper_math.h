@@ -1387,15 +1387,24 @@ inline __host__ __device__ float4 fabs(float4 v)
 
 inline __host__ __device__ int2 abs(int2 v)
 {
-    return make_int2(abs(v.x), abs(v.y));
+    int x = v.x < 0 ? - v.x : v.x;
+    int y = v.y < 0 ? - v.y : v.y;
+    return make_int2(x,y);
 }
 inline __host__ __device__ int3 abs(int3 v)
 {
-    return make_int3(abs(v.x), abs(v.y), abs(v.z));
+    int x = v.x < 0 ? - v.x : v.x;
+    int y = v.y < 0 ? - v.y : v.y;
+    int z = v.z < 0 ? - v.z : v.z;
+    return make_int3(x,y,z);
 }
 inline __host__ __device__ int4 abs(int4 v)
 {
-    return make_int4(abs(v.x), abs(v.y), abs(v.z), abs(v.w));
+    int x = v.x < 0 ? - v.x : v.x;
+    int y = v.y < 0 ? - v.y : v.y;
+    int z = v.z < 0 ? - v.z : v.z;
+    int w = v.w < 0 ? - v.w : v.w;
+    return make_int4(x,y,z,w);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
