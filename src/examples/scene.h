@@ -11,8 +11,8 @@
 
 #include <vector_types.h>
 
-#include <PeriCUDAEngine/definitions.h>
-#include <PeriCUDAEngine/parameters.h>
+#include <core/definitions.h>
+#include <core/parameters.h>
 #include "mesh_query0.1/mesh_query.h"
 #include "cyPoint.h"
 

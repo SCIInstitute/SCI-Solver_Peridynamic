@@ -8,10 +8,10 @@
 
 #include <iostream>
 
-#include <PeriCUDAEngine/utilities.h>
-#include <PeriCUDAEngine/parameters.h>
-#include <PeriCUDAEngine/memory_manager.h>
-#include <PeriCUDAEngine/simulator.h>
+#include <core/utilities.h>
+#include <core/parameters.h>
+#include <core/memory_manager.h>
+#include <core/simulator.h>
 #include "scene.h"
 
 using namespace std;

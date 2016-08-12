@@ -7,11 +7,11 @@
 //------------------------------------------------------------------------------------------
 #include <iostream>
 #include <math.h>
-#include <helper_math.h>
+#include <core/helper_math.h>
 #include "scene.h"
 
-#include "../PeriCUDAEngine/cutil_math_ext.h"
-#include "../PeriCUDAEngine/monitor.h"
+#include "core/cutil_math_ext.h"
+#include "core/monitor.h"
 #include "cyTriMesh.h"
 
 //------------------------------------------------------------------------------------------
@@ -660,10 +660,12 @@ void Scene::transformParticles(real4_t* particles, real4_t translation, real4_t 
     double sinA, cosA, sinE, cosE, sinR, cosR;
     double R[3][3];
     double tmp[4];
-
-    sincos(azimuth, &sinA, &cosA);
-    sincos(elevation, &sinE, &cosE);
-    sincos(roll, &sinR, &cosR);
+    sinA = std::sin(azimuth);
+    cosA = std::cos(azimuth);
+    sinE = std::sin(elevation);
+    cosE = std::cos(elevation);
+    sinR = std::sin(roll);
+    cosR = std::cos(roll);
 
     R[0][0] = cosR * cosA - sinR * sinA * sinE;
     R[0][1] = sinR * cosA + cosR * sinA * sinE;

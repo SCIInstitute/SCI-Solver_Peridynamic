@@ -26,14 +26,14 @@ set(EXTERNAL_DIR "${CMAKE_BINARY_DIR}/externals")
 set(CUSP_INSTALL_DIR "${EXTERNAL_DIR}/cusp")
 ExternalProject_Add( cusp
   PREFIX "${CUSP_INSTALL_DIR}"
-  GIT_REPOSITORY "https://github.com/cibc-internal/cusp.git"
+  GIT_REPOSITORY "https://github.com/cusplibrary/cusplibrary.git"
   INSTALL_DIR "${CUSP_INSTALL_DIR}/include"
   BINARY_DIR "${CUSP_INSTALL_DIR}/lib"
   INSTALL_COMMAND ""
   BUILD_COMMAND ""
   CONFIGURE_COMMAND ""
   )
-include_directories("${CUSP_INSTALL_DIR}/src")
+include_directories("${CUSP_INSTALL_DIR}/src/cusp")
 ###################
 #CMAKE SETTING CUDA_NVCC_FLAGS
 #############################
