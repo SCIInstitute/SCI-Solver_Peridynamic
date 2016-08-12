@@ -21,9 +21,6 @@ steps_per_state 500000
 start_step 0
 final_step 10000
 
-obj_file /home/gpayne/Desktop/PeriCUDA/BunnyBreak/bunny.obj
-saving_path /home/gpayne/Desktop/PeriCUDA/BunnyBreak/SimData/BunnyBreak
-
 dump_activity 0
 dump_density 0
 dump_velocity 0

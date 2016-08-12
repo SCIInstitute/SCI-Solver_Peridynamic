@@ -23,118 +23,120 @@ Simulator* simulator = NULL;
 //------------------------------------------------------------------------------------------
 int main(int argc, char* argv[])
 {
-    if(argc < 2)
+  if(argc < 4)
+  {
+    cout << "Usage: ./BunnyBreak <parameter_file> <obj_file> <out_dir>" << endl;
+    exit(EXIT_FAILURE);
+  }
+
+  /////////////////////////////////////////////////////////////////
+  // load parameter from disk
+  Monitor::recordEvent("Load system parameters");
+  sysParams = new SystemParameter(argv[1]);
+  RunningParameters& runningParams = sysParams->getRunningParameters();
+  strcpy(runningParams.obj_file, argv[2]);
+  strcpy(runningParams.saving_path, argv[3]);
+  SimulationParameters& simParams = sysParams->getSimulationParameters();
+
+  // modify this line to change to another scene
+  scene = new Scene(simParams, runningParams, Scene::REGULAR_GRID);
+
+  if(runningParams.integrator == IMPLICIT_EULER)
+  {
+    Monitor::recordEvent("Create simulator(Implicite Euler for PD)");
+  }
+  else
+  {
+    Monitor::recordEvent("Create simulator(Newmark Beta for PD)");
+  }
+
+  checkCudaErrors(cudaSetDevice(runningParams.gpu_device));
+  simulator = new Simulator(runningParams.gpu_device, simParams, runningParams);
+
+  /////////////////////////////////////////////////////////////////
+  // init data from the beginning or load from disk
+  if(runningParams.start_step == 0)
+  {
+    // find the boundary particle first, to have rest density calculated
+    scene->initSPHBoundaryParticles(simulator->get_sph_boundary_pos());
+    scene->initSPHParticles(simulator->get_sph_activity(),
+        simulator->get_sph_position(),
+        simulator->get_sph_velocity());
+    scene->initPeridynamicsParticles(simulator->get_pd_activity(),
+        simulator->get_pd_position(),
+        simulator->get_pd_velocity());
+  }
+  else
+  {
+    simulator->dataIO().loadState(runningParams.start_step);
+  }
+
+  simulator->makeReady();
+
+
+  /////////////////////////////////////////////////////////////////
+  // simulation
+  size_t frameStep = 0;
+  size_t stateStep = 0;
+  char buff[512];
+
+  Monitor::recordEvent("=========================Start simulation=========================");
+
+
+  // run simulation
+  while(!simulator->finished())
+  {
+    if(frameStep == 0)
     {
-        cout << "Usage: ./BunnyBreak <parameter_file>" << endl;
-        exit(EXIT_FAILURE);
+      simulator->dataIO().newFrame();
+      simulator->dataIO().getDataAndWrite();
+
+      sprintf(buff, "Save frame %d(step %d)", simulator->dataIO().savedFrame,
+          simulator->get_current_step());
+      Monitor::recordEvent(buff);
+      simulator->printSimulationTime();
     }
 
-    /////////////////////////////////////////////////////////////////
-    // load parameter from disk
-    Monitor::recordEvent("Load system parameters");
-    sysParams = new SystemParameter(argv[1]);
-    RunningParameters& runningParams = sysParams->getRunningParameters();
-    SimulationParameters& simParams = sysParams->getSimulationParameters();
-
-    // modify this line to change to another scene
-    scene = new Scene(simParams, runningParams, Scene::REGULAR_GRID);
-
-    if(runningParams.integrator == IMPLICIT_EULER)
+    if(stateStep == runningParams.step_per_state)
     {
-        Monitor::recordEvent("Create simulator(Implicite Euler for PD)");
-    }
-    else
-    {
-        Monitor::recordEvent("Create simulator(Newmark Beta for PD)");
+      simulator->dataIO().saveState(simulator->get_current_step());
+      stateStep = 0;
     }
 
-    checkCudaErrors(cudaSetDevice(runningParams.gpu_device));
-    simulator = new Simulator(runningParams.gpu_device, simParams, runningParams);
-
-    /////////////////////////////////////////////////////////////////
-    // init data from the beginning or load from disk
-    if(runningParams.start_step == 0)
+    simulator->advance();
     {
-        // find the boundary particle first, to have rest density calculated
-        scene->initSPHBoundaryParticles(simulator->get_sph_boundary_pos());
-        scene->initSPHParticles(simulator->get_sph_activity(),
-                                simulator->get_sph_position(),
-                                simulator->get_sph_velocity());
-        scene->initPeridynamicsParticles(simulator->get_pd_activity(),
-                                         simulator->get_pd_position(),
-                                         simulator->get_pd_velocity());
-    }
-    else
-    {
-        simulator->dataIO().loadState(runningParams.start_step);
+      ++frameStep;
+      ++stateStep;
     }
 
-    simulator->makeReady();
-
-
-    /////////////////////////////////////////////////////////////////
-    // simulation
-    size_t frameStep = 0;
-    size_t stateStep = 0;
-    char buff[512];
-
-    Monitor::recordEvent("=========================Start simulation=========================");
-
-
-    // run simulation
-    while(!simulator->finished())
+    if(frameStep == runningParams.step_per_frame)
     {
-        if(frameStep == 0)
-        {
-            simulator->dataIO().newFrame();
-            simulator->dataIO().getDataAndWrite();
-
-            sprintf(buff, "Save frame %d(step %d)", simulator->dataIO().savedFrame,
-                    simulator->get_current_step());
-            Monitor::recordEvent(buff);
-            simulator->printSimulationTime();
-        }
-
-        if(stateStep == runningParams.step_per_state)
-        {
-            simulator->dataIO().saveState(simulator->get_current_step());
-            stateStep = 0;
-        }
-
-        simulator->advance();
-        {
-            ++frameStep;
-            ++stateStep;
-        }
-
-        if(frameStep == runningParams.step_per_frame)
-        {
-            frameStep = 0;
-        }
-
+      frameStep = 0;
     }
 
-    cout << "=========================================================================================="
-         << endl;
-    cout << "Total simulation steps: " << runningParams.final_step << endl;
-    cout << "Total saved frames: " << simulator->dataIO().savedFrame << endl;
-    cout << "Data saved to: " << runningParams.saving_path << endl;
+  }
 
-    if(simulator->CGConvergence())
-    {
-        cout << "Simulation finshed successfully." << endl;
-    }
-    else
-    {
-        cout << "Simulation failed." << endl;
-    }
+  cout << "=========================================================================================="
+    << endl;
+  cout << "Total simulation steps: " << runningParams.final_step << endl;
+  cout << "Total saved frames: " << simulator->dataIO().savedFrame << endl;
+  cout << "Data saved to: " << runningParams.saving_path << endl;
 
-    cout << "=========================================================================================="
-         << endl;
+  if(simulator->CGConvergence())
+  {
+    cout << "Simulation finshed successfully." << endl;
+  }
+  else
+  {
+    cout << "Simulation failed." << endl;
+  }
 
-    cudaDeviceReset();
+  cout << "=========================================================================================="
+    << endl;
 
-    return EXIT_SUCCESS;
+  cudaDeviceReset();
+
+  return EXIT_SUCCESS;
 }
 
 
