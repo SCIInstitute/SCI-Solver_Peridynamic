@@ -290,7 +290,7 @@ bool DataReader::readFrame(int frame, int viewport)
 
     switch(currentColorMode_)
     {
-    case ParticleColorMode::COLOR_STIFFNESS:
+    case COLOR_STIFFNESS:
     {
 
         if(readPosition(frame, viewport) && readStiffness(frame, viewport) &&
@@ -309,7 +309,7 @@ bool DataReader::readFrame(int frame, int viewport)
     }
     break;
 
-    case ParticleColorMode::COLOR_ACTIVITY:
+    case COLOR_ACTIVITY:
     {
         if(readPosition(frame, viewport) && readActivity(frame, viewport))
         {
@@ -328,9 +328,9 @@ bool DataReader::readFrame(int frame, int viewport)
     }
     break;
 
-    case ParticleColorMode::COLOR_RANDOM:
-    case ParticleColorMode::COLOR_RAMP:
-    case ParticleColorMode::COLOR_PARTICLE_TYPE:
+    case COLOR_RANDOM:
+    case COLOR_RAMP:
+    case COLOR_PARTICLE_TYPE:
     {
         if(readPosition(frame, viewport) &&
            (!bHideInvisibleParticles || (bHideInvisibleParticles && readActivity(frame, viewport))))
@@ -348,7 +348,7 @@ bool DataReader::readFrame(int frame, int viewport)
     }
     break;
 
-    case ParticleColorMode::COLOR_DENSITY:
+    case COLOR_DENSITY:
     {
         if(readSortedPosition(frame, viewport) && readDensity(frame, viewport) &&
            (!bHideInvisibleParticles || (bHideInvisibleParticles && readActivity(frame, viewport))))

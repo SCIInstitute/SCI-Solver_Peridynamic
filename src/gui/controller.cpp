@@ -242,13 +242,13 @@ void Controller::setupGUI()
 
 
     signalMapperParticleColor->setMapping(rdbColorRandom,
-                                          (int) ParticleColorMode::COLOR_RANDOM);
-    signalMapperParticleColor->setMapping(rdbColorRamp, (int) ParticleColorMode::COLOR_RAMP);
+                                          (int) COLOR_RANDOM);
+    signalMapperParticleColor->setMapping(rdbColorRamp, (int) COLOR_RAMP);
     signalMapperParticleColor->setMapping(rdbColorParticleType,
-                                          (int) ParticleColorMode::COLOR_PARTICLE_TYPE);
-    signalMapperParticleColor->setMapping(rdbColorDensity, (int) ParticleColorMode::COLOR_DENSITY);
-    signalMapperParticleColor->setMapping(rdbColorStiffness, (int) ParticleColorMode::COLOR_STIFFNESS);
-    signalMapperParticleColor->setMapping(rdbColorActivity, (int) ParticleColorMode::COLOR_ACTIVITY);
+                                          (int) COLOR_PARTICLE_TYPE);
+    signalMapperParticleColor->setMapping(rdbColorDensity, (int) COLOR_DENSITY);
+    signalMapperParticleColor->setMapping(rdbColorStiffness, (int) COLOR_STIFFNESS);
+    signalMapperParticleColor->setMapping(rdbColorActivity, (int) COLOR_ACTIVITY);
 
     wgSPHParticleColor = new ColorSelector;
     wgSPHParticleColor->setAutoFillBackground(true);
@@ -301,12 +301,12 @@ void Controller::setupGUI()
             SLOT(map()));
 
     signalMapperParticleViewing->setMapping(rdbPVSphere,
-                                            (int) ParticleViewMode::SPHERES_VIEW);
-    signalMapperParticleViewing->setMapping(rdbPVPoint, (int) ParticleViewMode::POINTS_VIEW);
+                                            (int) SPHERES_VIEW);
+    signalMapperParticleViewing->setMapping(rdbPVPoint, (int) POINTS_VIEW);
     signalMapperParticleViewing->setMapping(rdbPVOpaqueSurface,
-                                            (int) ParticleViewMode::OPAQUE_SURFACE_VIEW);
+                                            (int) OPAQUE_SURFACE_VIEW);
     signalMapperParticleViewing->setMapping(rdbPVTransparentSurface,
-                                            (int) ParticleViewMode::TRANSPARENT_SURFACE_VIEW);
+                                            (int) TRANSPARENT_SURFACE_VIEW);
 
     ////////////////////////////////////////////////////////////////////////////////
     /// simulation info

@@ -346,7 +346,7 @@ private:
     UnitPlane* planeObject;
     UnitCube* cubeObject;
 
-    GLuint UBOBindingIndex[UBOBinding::NUM_BINDING_POINTS];
+    GLuint UBOBindingIndex[NUM_BINDING_POINTS];
     GLuint UBOMatrices;
     GLuint UBOLight;
     GLuint UBOGroundMaterial;
