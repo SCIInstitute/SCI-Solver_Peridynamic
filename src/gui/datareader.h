@@ -62,7 +62,7 @@ private:
     void clearMemory();
     void allocateMemory();
     bool readFrame(int frame, int viewport);
-    bool readData(char* data_file, void* data, int data_size);
+    bool readData(const char* data_file, void* data, int data_size);
     bool readPosition(int frame, int viewport);
     bool readActivity(int frame, int viewport);
     bool readStiffness(int frame, int viewport);
@@ -72,6 +72,7 @@ private:
     int num_viewports_;
     SimulationParameters simParams_[2];
     QString data_dir_[2];
+    std::string dir_;
     int num_frames_;
     int current_frame_;
     int frame_time_;

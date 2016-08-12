@@ -8,7 +8,6 @@
 
 #include "datareader.h"
 
-
 DataReader::DataReader():
     num_frames_(0),
     current_frame_(1),
@@ -53,6 +52,7 @@ void DataReader::setSimulationDataInfo(QString* data_dir, SimulationParameters* 
         simParams_[i] = simParams[i];
         data_dir_[i] = data_dir[i];
     }
+    this->dir_ = data_dir_[0].toStdString();
 
     num_frames_ = num_frames;
     num_viewports_ = num_viewports;
@@ -375,7 +375,7 @@ bool DataReader::readFrame(int frame, int viewport)
 }
 
 //------------------------------------------------------------------------------------------
-bool DataReader::readData(char* data_file, void* data, int data_size)
+bool DataReader::readData(const char* data_file, void* data, int data_size)
 {
     if(data_size <= 0)
     {
@@ -399,17 +399,12 @@ bool DataReader::readData(char* data_file, void* data, int data_size)
 //------------------------------------------------------------------------------------------
 bool DataReader::readPosition(int frame, int viewport)
 {
-    char fileNameSPH[128];
-    char fileNamePD[128];
+  auto s1 = this->dir_ + "/SPH_POSITION/frame." + std::to_string(frame);
+  auto s2 = this->dir_ + "/PD_POSITION/frame." + std::to_string(frame);
 
-    sprintf(fileNameSPH, "%s/SPH_POSITION/frame.%lu",
-            data_dir_[viewport].toStdString().c_str(), frame);
-    sprintf(fileNamePD, "%s/PD_POSITION/frame.%lu", data_dir_[viewport].toStdString().c_str(),
-            frame);
-
-    return( readData(fileNameSPH, sph_positions_[viewport],
+    return( readData(s1.c_str(), sph_positions_[viewport],
                      4 * sizeof(real_t) * simParams_[viewport].num_sph_particle) &&
-            readData(fileNamePD, pd_positions_[viewport],
+                     readData(s2.c_str(), pd_positions_[viewport],
                      4 * sizeof(real_t) * simParams_[viewport].num_pd_particle)  &&
             simParams_[viewport].num_total_particle > 0);
 

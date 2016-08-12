@@ -31,7 +31,7 @@ ELSEIF(WIN32)
   SET(src ${src} ${CMAKE_SOURCE_DIR}/Resources/icons/PeriViz.rc)
 ENDIF(APPLE)
 
-add_executable(PeriViz WIN32 MACOSX_BUNDLE
+add_executable(PeriViz MACOSX_BUNDLE
   ${UI_SRC} ${src} ${hdr} ${rscs} )
 target_link_libraries(PeriViz
   Qt5::Widgets

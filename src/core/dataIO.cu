@@ -228,7 +228,7 @@ void DataIO::writeSimulationParameter()
     FILE* fptr;
     char buff[512];
 
-    sprintf(buff, "%s/DATA/sim_info.dat", savingPath);
+    sprintf(buff, "%s/sim_info.dat", savingPath);
 
     fptr = fopen(buff, "w");
     TRUE_OR_DIE(fptr, "Could not open file for write.");
@@ -238,7 +238,7 @@ void DataIO::writeSimulationParameter()
     fclose(fptr);
 
     // write for visualization
-    sprintf(buff, "%s/DATA/viz_info.dat", savingPath);
+    sprintf(buff, "%s/viz_info.dat", savingPath);
 
     std::ofstream outFile(buff, std::ofstream::out);
     TRUE_OR_DIE(outFile.is_open(), "Could not open parameter file.");
