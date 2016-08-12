@@ -429,13 +429,19 @@ bool Simulator::integratePeridynamicsImplicitEuler()
 
   fillMatrixImplicitEuler <<< kernelPD_.nblocks, kernelPD_.nthreads>>>(pd_activity,
       pd_bond_list_top,
-      pd_system_matrix);
+      pd_system_matrix,
+      hostSimParams_.num_pd_particle,
+      hostSimParams_.pd_time_step,
+      hostSimParams_.pd_particle_mass);
   getLastCudaError("Kernel execution failed: fillMatrix");
 
   fillVectorBImplicitEuler <<< kernelPD_.nblocks, kernelPD_.nthreads>>>(pd_activity,
       pd_force,
       pd_velocity,
-      pd_system_vector);
+      pd_system_vector,
+      hostSimParams_.num_pd_particle,
+      hostSimParams_.pd_time_step,
+      hostSimParams_.pd_particle_mass);
   getLastCudaError("Kernel execution failed: fillVectorB");
 
 
@@ -446,7 +452,17 @@ bool Simulator::integratePeridynamicsImplicitEuler()
 
   updatePDPositionImplicitEuler <<< kernelPD_.nblocks, kernelPD_.nthreads>>>(pd_activity,
       pd_position,
-      pd_velocity);
+      pd_velocity,
+      hostSimParams_.num_pd_particle,
+      hostSimParams_.pd_time_step,
+      hostSimParams_.pd_particle_radius,
+      hostSimParams_.boundary_min_x,
+      hostSimParams_.boundary_min_y,
+      hostSimParams_.boundary_min_z,
+      hostSimParams_.boundary_min_x,
+      hostSimParams_.boundary_max_y,
+      hostSimParams_.boundary_max_z
+      );
   getLastCudaError("Kernel execution failed: updatePDPosition");
 
   //        correctCollidedPDParticle <<< kernelPD_.nblocks, kernelPD_.nthreads>>>
@@ -595,13 +611,19 @@ bool Simulator::integratePeridynamicsNewmarkBeta()
 
   fillMatrixNewmarkBeta <<< kernelPD_.nblocks, kernelPD_.nthreads>>>(pd_activity,
       pd_bond_list_top,
-      pd_system_matrix);
+      pd_system_matrix,
+      hostSimParams_.num_pd_particle,
+      hostSimParams_.pd_time_step,
+      hostSimParams_.pd_particle_mass);
   getLastCudaError("Kernel execution failed: fillMatrix");
 
   fillVectorBNewmarkBeta <<< kernelPD_.nblocks, kernelPD_.nthreads>>>(pd_activity,
       pd_force,
       pd_velocity,
-      pd_system_vector);
+      pd_system_vector,
+      hostSimParams_.num_pd_particle,
+      hostSimParams_.pd_time_step,
+      hostSimParams_.pd_particle_mass);
   getLastCudaError("Kernel execution failed: fillVectorB");
 
 
@@ -610,13 +632,25 @@ bool Simulator::integratePeridynamicsNewmarkBeta()
 
   updatePDVelocityNewmarkBeta <<< kernelPD_.nblocks, kernelPD_.nthreads>>>(pd_activity,
       pd_velocity,
-      pd_system_solution);
+      pd_system_solution,
+      hostSimParams_.num_pd_particle,
+      hostSimParams_.pd_time_step);
   getLastCudaError("Kernel execution failed: updatePDVelocity");
 
   updatePDPositionNewmarkBeta <<< kernelPD_.nblocks, kernelPD_.nthreads>>>(pd_activity,
       pd_position,
       pd_velocity,
-      pd_system_solution);
+      pd_system_solution,
+      hostSimParams_.num_pd_particle,
+      hostSimParams_.pd_time_step,
+      hostSimParams_.pd_particle_radius,
+      hostSimParams_.boundary_min_x,
+      hostSimParams_.boundary_min_y,
+      hostSimParams_.boundary_min_z,
+      hostSimParams_.boundary_max_x,
+      hostSimParams_.boundary_max_y,
+      hostSimParams_.boundary_max_z
+      );
   getLastCudaError("Kernel execution failed: updatePDPosition");
 
   //        correctCollidedPDParticle <<< kernelPD_.nblocks, kernelPD_.nthreads>>>

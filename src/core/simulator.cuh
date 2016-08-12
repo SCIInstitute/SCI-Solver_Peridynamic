@@ -871,7 +871,7 @@ __global__ void calculateCellHash(int* _particleCellHash,
         return;
     }
 
-    volatile real4_t ppos = _position[index];
+    double4 ppos = _position[index];
 
     // get address in grid
     int3 gridPos = calcGridPos(ppos);
