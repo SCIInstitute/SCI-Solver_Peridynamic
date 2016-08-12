@@ -22,7 +22,7 @@
 #include <string.h>
 #include <cuda.h>
 #include <cuda_runtime.h>
-#include <helper_string.h>
+#include "helper_string.h"
 
 #ifndef EXIT_WAIVED
 #define EXIT_WAIVED 2

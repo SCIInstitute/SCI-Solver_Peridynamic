@@ -9,7 +9,7 @@
 #ifndef SIMULATOR_H
 #define SIMULATOR_H
 
-#include <helper_math.h>
+#include "helper_math.h"
 #include <math_constants.h>
 
 //#include "cg_solver.cuh"

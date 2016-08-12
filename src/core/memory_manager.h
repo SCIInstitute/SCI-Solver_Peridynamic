@@ -10,7 +10,7 @@
 #define SIMULATIONMEMORY_H
 
 #include <stdint.h>
-#include <helper_cuda.h>
+#include "helper_cuda.h"
 #include <map>
 
 #include "definitions.h"

@@ -15,6 +15,7 @@
 #include <core/parameters.h>
 #include "mesh_query0.1/mesh_query.h"
 #include "cyPoint.h"
+#include <cstdlib>
 
 #define JITTER 0.01
 
