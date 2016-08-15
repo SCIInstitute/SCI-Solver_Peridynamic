@@ -7,7 +7,12 @@
 //------------------------------------------------------------------------------------------
 #include <sys/stat.h>
 #include <errno.h>
-
+#include <sys/types.h>
+#include <sys/stat.h>
+#if WIN32
+#include <direct.h>
+#else
+#endif
 #include "monitor.h"
 #include "dataIO.h"
 
@@ -103,7 +108,6 @@ void DataIO::getDataAndWrite(MemoryManager::Variables _variable)
 
     FILE* fptr;
     char buff[512];
-
     sprintf(buff, "%s/DATA/%s/frame.%lu", savingPath, simMemory_.getVariableName(_variable),
             savedFrame);
 
@@ -202,24 +206,32 @@ void DataIO::newFrame()
 //------------------------------------------------------------------------------------------
 void DataIO::createOutputFolders()
 {
-    Monitor::recordEvent("Prepare output folder");
-
-    char buff[512];
-
-    for(size_t i = 0; i < MemoryManager::NUM_VARIABLES; ++i)
-    {
-        MemoryManager::Variables variable = static_cast<MemoryManager::Variables>(i);
-
-        if(savingMap[variable] == 1)
-        {
-            sprintf(buff, "mkdir -p %s/DATA/%s", savingPath, simMemory_.getVariableName(variable));
-            system(buff);
-        }
+  struct stat info;
+  Monitor::recordEvent("Prepare output folder");
+  // create dirs that don't exist
+  //main DATA
+  auto datadir = std::string(savingPath) + "/DATA";
+  if (stat(datadir.c_str(), &info) != 0 ||
+    !(info.st_mode & S_IFDIR)) {
+    mkdir(datadir.c_str());
+  }
+  //STATE
+  datadir = std::string(savingPath) + "/DATA/STATE";
+  if (stat(datadir.c_str(), &info) != 0 ||
+    !(info.st_mode & S_IFDIR)) {
+    mkdir(datadir.c_str());
+  }
+  //frames
+  for (size_t i = 0; i < MemoryManager::NUM_VARIABLES; ++i) {
+    MemoryManager::Variables variable = static_cast<MemoryManager::Variables>(i);
+    if (savingMap[variable] == 1) {
+      auto dir = std::string(savingPath) + "/DATA/" + simMemory_.getVariableName(variable);
+      if (stat(dir.c_str(), &info) != 0 ||
+        !(info.st_mode & S_IFDIR)) {
+        mkdir(dir.c_str());
+      }
     }
-
-    // create folder for saving state
-    sprintf(buff, "mkdir -p %s/STATE", savingPath);
-    system(buff);
+  }
 }
 
 //------------------------------------------------------------------------------------------
@@ -228,7 +240,7 @@ void DataIO::writeSimulationParameter()
     FILE* fptr;
     char buff[512];
 
-    sprintf(buff, "%s/sim_info.dat", savingPath);
+    sprintf(buff, "%s/DATA/sim_info.dat", savingPath);
 
     fptr = fopen(buff, "w");
     TRUE_OR_DIE(fptr, "Could not open file for write.");
@@ -238,7 +250,7 @@ void DataIO::writeSimulationParameter()
     fclose(fptr);
 
     // write for visualization
-    sprintf(buff, "%s/viz_info.dat", savingPath);
+    sprintf(buff, "%s/DATA/viz_info.dat", savingPath);
 
     std::ofstream outFile(buff, std::ofstream::out);
     TRUE_OR_DIE(outFile.is_open(), "Could not open parameter file.");

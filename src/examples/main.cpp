@@ -37,7 +37,6 @@ int main(int argc, char* argv[])
   strcpy(runningParams.obj_file, argv[2]);
   strcpy(runningParams.saving_path, argv[3]);
   SimulationParameters& simParams = sysParams->getSimulationParameters();
-
   // modify this line to change to another scene
   scene = new Scene(simParams, runningParams, Scene::REGULAR_GRID);
 

@@ -399,8 +399,8 @@ bool DataReader::readData(const char* data_file, void* data, int data_size)
 //------------------------------------------------------------------------------------------
 bool DataReader::readPosition(int frame, int viewport)
 {
-  auto s1 = this->dir_ + "/SPH_POSITION/frame." + std::to_string(frame);
-  auto s2 = this->dir_ + "/PD_POSITION/frame." + std::to_string(frame);
+  auto s1 = this->dir_ + "/DATA/SPH_POSITION/frame." + std::to_string(frame);
+  auto s2 = this->dir_ + "/DATA/PD_POSITION/frame." + std::to_string(frame);
 
     return( readData(s1.c_str(), sph_positions_[viewport],
                      4 * sizeof(real_t) * simParams_[viewport].num_sph_particle) &&
@@ -417,9 +417,9 @@ bool DataReader::readActivity(int frame, int viewport)
     char fileNameSPH[128];
     char fileNamePD[128];
 
-    sprintf(fileNameSPH, "%s/SPH_ACTIVITY/frame.%lu",
+    sprintf(fileNameSPH, "%s/DATA/SPH_ACTIVITY/frame.%lu",
             data_dir_[viewport].toStdString().c_str(), frame);
-    sprintf(fileNamePD, "%s/PD_ACTIVITY/frame.%lu", data_dir_[viewport].toStdString().c_str(),
+    sprintf(fileNamePD, "%s/DATA/PD_ACTIVITY/frame.%lu", data_dir_[viewport].toStdString().c_str(),
             frame);
 
     return( readData(fileNameSPH, sph_activities_[viewport],
@@ -434,7 +434,7 @@ bool DataReader::readStiffness(int frame, int viewport)
 {
     char fileNamePD[128];
 
-    sprintf(fileNamePD, "%s/PD_BOND_STIFFNESS/frame.%lu",
+    sprintf(fileNamePD, "%s/DATA/PD_BOND_STIFFNESS/frame.%lu",
             data_dir_[viewport].toStdString().c_str(),
             frame);
 
@@ -448,7 +448,7 @@ bool DataReader::readDensity(int frame, int viewport)
 {
     char fileNameSPH[128];
 
-    sprintf(fileNameSPH, "%s/SPH_SORTED_DENSITY/frame.%lu",
+    sprintf(fileNameSPH, "%s/DATA/SPH_SORTED_DENSITY/frame.%lu",
             data_dir_[viewport].toStdString().c_str(), frame);
 
     return( readData(fileNameSPH, sph_densities_[viewport],
@@ -462,10 +462,10 @@ bool DataReader::readSortedPosition(int frame, int viewport)
     char fileNameSPH[128];
     char fileNamePD[128];
 
-    sprintf(fileNameSPH, "%s/SPH_SORTED_POSITION/frame.%lu",
+    sprintf(fileNameSPH, "%s/DATA/SPH_SORTED_POSITION/frame.%lu",
             data_dir_[viewport].toStdString().c_str(),
             frame);
-    sprintf(fileNamePD, "%s/PD_POSITION/frame.%lu", data_dir_[viewport].toStdString().c_str(),
+    sprintf(fileNamePD, "%s/DATA/PD_POSITION/frame.%lu", data_dir_[viewport].toStdString().c_str(),
             frame);
 
     return( readData(fileNameSPH, sph_positions_[viewport],

@@ -26,7 +26,6 @@ public:
                                int num_frames, int num_viewports);
 
     void updateNumFrames(int num_frames_);
-    void setCurrentFrame(int current_frame_);
     void resetToFirstFrame();
 
 
@@ -54,7 +53,7 @@ public slots:
     void readNextFrameAutomatically();
     void readNextFrame();
     void setParticleColorMode(int color_mode);
-
+    void setCurrentFrame(int current_frame_);
     void hideInvisibleParticles(bool status);
 
 private:
