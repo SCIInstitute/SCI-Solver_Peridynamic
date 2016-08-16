@@ -17,18 +17,15 @@ ParameterLoader::ParameterLoader():
     num_frames(0),
     frame_duration(10),
     frame_stride(1),
-    data_dir("")
-{
+    data_dir("") {
     dataDirWatcher = new QFileSystemWatcher(this);
     connect(dataDirWatcher, &QFileSystemWatcher::directoryChanged,
             this, &ParameterLoader::countFiles);
 }
 
 //------------------------------------------------------------------------------------------
-ParameterLoader::~ParameterLoader()
-{
+ParameterLoader::~ParameterLoader() {
     delete listSimInfo;
-
 }
 
 //------------------------------------------------------------------------------------------

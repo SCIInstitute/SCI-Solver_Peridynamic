@@ -121,12 +121,9 @@ int main(int argc, char* argv[])
   cout << "Total saved frames: " << simulator->dataIO().savedFrame << endl;
   cout << "Data saved to: " << runningParams.saving_path << endl;
 
-  if(simulator->CGConvergence())
-  {
+  if(simulator->CGConvergence()) {
     cout << "Simulation finshed successfully." << endl;
-  }
-  else
-  {
+  } else {
     cout << "Simulation failed." << endl;
   }
 
