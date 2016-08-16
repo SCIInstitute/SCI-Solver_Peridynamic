@@ -444,8 +444,6 @@ bool Simulator::integratePeridynamicsImplicitEuler()
       hostSimParams_.pd_particle_mass);
   getLastCudaError("Kernel execution failed: fillVectorB");
 
-
-
   solveLinearSystem();
 
   simMemory_.transferData(MemoryManager::PD_VELOCITY, MemoryManager::PD_SYSTEM_SOLUTION);
@@ -459,21 +457,11 @@ bool Simulator::integratePeridynamicsImplicitEuler()
       hostSimParams_.boundary_min_x,
       hostSimParams_.boundary_min_y,
       hostSimParams_.boundary_min_z,
-      hostSimParams_.boundary_min_x,
+      hostSimParams_.boundary_max_x,
       hostSimParams_.boundary_max_y,
       hostSimParams_.boundary_max_z
       );
   getLastCudaError("Kernel execution failed: updatePDPosition");
-
-  //        correctCollidedPDParticle <<< kernelPD_.nblocks, kernelPD_.nthreads>>>
-  //        (pdActivity,
-  //         pdVelocity,
-  //         pdPosition,
-  //         pdNeighborList);
-  //        getLastCudaError("Kernel execution failed: correctCollidedPDParticle");
-
-
-
   return true;
 
 }

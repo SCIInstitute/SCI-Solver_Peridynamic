@@ -61,7 +61,7 @@ SimulationParameters ParameterLoader::getSimulationParameters()
 bool ParameterLoader::loadParameters(const char* _dataPath)
 {
     char fileName[128];
-    sprintf(fileName, "%s/viz_info.dat", _dataPath);
+    sprintf(fileName, "%s/DATA/viz_info.dat", _dataPath);
     std::ifstream inFile(fileName);
 
     if (!inFile.is_open())
