@@ -83,18 +83,17 @@ Running Examples
 The "BunnyBreak" example is run from <PATH>/BunnyBreak. The params.txt file is used to specify the necessary parameters for the simulation run. Use a text editor to set the following two paths to suit your system:
  * obj_file /path/to/repo/PeriCUDA/BunnyBreak/bunny.obj
  * saving_path /path/to/repo/PeriCUDA/BunnyBreak/SimData/BunnyBreak
+ 
 Other parameters in the file can also be modified, including the following (with descriptions):
- * adaptive_integration = 0/1: integration using adaptive time step or fixed time step
- * num_pd_particle = 0/<non-zero>: if it is zero, no particle generated. non zero: generated particles to fill a mesh
- * pd_stretch_limit_s0 = <double>: set threshold on bond stretch. Bonds that stretched beyond this threshold will break
- * mesh_translation_x/y/z: translate the mesh in domain
- * steps_per_frame = <int>: save data every <steps_per_frame> time steps
- * final_step = <int>: final time step
- * obj_file = <string>: mesh file. The mesh should be watertight
- * saving_path = <string>: where data will be saved
- * boundary_min/max_x/y/z: simulation domain
- * pd_kernel_coeff = <double>: define the radius of particle connection. For example, pd_kernel_coeff=5 means that a particle will connect to other particles that stay within 5 times particle radius
- * pd_particle_mass = <double>: mass of particle
+ * adaptive_integration [0|1]  (integration using adaptive time step or fixed time step)
+ * num_pd_particle int  (if it is zero, no particle generated, non zero: generated particles to fill a mesh)
+ * pd_stretch_limit_s0 double  (set threshold on bond stretch. Bonds that stretched beyond this threshold will break)
+ * mesh_translation_[x|y|z] double  (translate the mesh in domain)
+ * steps_per_frame int  (save data every <steps_per_frame> time steps)
+ * final_step int  (final time step)
+ * boundary_[min|max]_[x|y|z] int  (simulation domain)
+ * pd_kernel_coeff double  (define the radius of particle connection, for example, pd_kernel_coeff=5 means that a particle will connect to other particles that stay within 5 times particle radius)
+ * pd_particle_mass double  (mass of particle)
 
 To run the simulation, type:
 ```c++
