@@ -209,26 +209,44 @@ void DataIO::createOutputFolders()
   struct stat info;
   Monitor::recordEvent("Prepare output folder");
   // create dirs that don't exist
+  if (stat(savingPath, &info) != 0 || !(info.st_mode & S_IFDIR)) {
+#ifndef WIN32
+    mkdir(savingPath, 0775);
+#else
+    mkdir(savingPath);
+#endif
+    TRUE_OR_DIE((stat(savingPath, &info) == 0),
+                "Could not create output dir (can't create more than 1 deep)");
+  }
   //main DATA
-  auto datadir = std::string(savingPath) + "/DATA";
-  if (stat(datadir.c_str(), &info) != 0 ||
-    !(info.st_mode & S_IFDIR)) {
+  std::string datadir = std::string(savingPath) + "/DATA";
+  if (stat(datadir.c_str(), &info) != 0 || !(info.st_mode & S_IFDIR)) {
+#ifndef WIN32
+    mkdir(datadir.c_str(), 0775);
+#else
     mkdir(datadir.c_str());
+#endif
   }
   //STATE
   datadir = std::string(savingPath) + "/DATA/STATE";
-  if (stat(datadir.c_str(), &info) != 0 ||
-    !(info.st_mode & S_IFDIR)) {
+  if (stat(datadir.c_str(), &info) != 0 || !(info.st_mode & S_IFDIR)) {
+#ifndef WIN32
+    mkdir(datadir.c_str(), 0775);
+#else
     mkdir(datadir.c_str());
+#endif
   }
   //frames
   for (size_t i = 0; i < MemoryManager::NUM_VARIABLES; ++i) {
     MemoryManager::Variables variable = static_cast<MemoryManager::Variables>(i);
     if (savingMap[variable] == 1) {
-      auto dir = std::string(savingPath) + "/DATA/" + simMemory_.getVariableName(variable);
-      if (stat(dir.c_str(), &info) != 0 ||
-        !(info.st_mode & S_IFDIR)) {
+        std::string dir = std::string(savingPath) + "/DATA/" + simMemory_.getVariableName(variable);
+      if (stat(dir.c_str(), &info) != 0 || !(info.st_mode & S_IFDIR)) {
+#ifndef WIN32
+        mkdir(dir.c_str(), 0775);
+#else
         mkdir(dir.c_str());
+#endif
       }
     }
   }
